@@ -2,18 +2,31 @@ import streamlit as st
 from PIL import Image
 from todos import access_todos
 
-todos = access_todos("r")
-# print(todos)
-
 st.set_page_config(page_title=None, page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
+st.subheader("Color to Grayscale Converter")
 
-with st.expander("Open Grayscaler"):
-    cam_img = st.camera_input("Camera")
+# Create a file uploader component allowing the user to upload a file
+uploaded_image = st.file_uploader("Upload Image")
 
-if cam_img:
-    process_img = Image.open(cam_img)
-    result_img = process_img.convert("L")
-    st.image(result_img)
+with st.expander("Start camera"):
+    camera_image = st.camera_input("Camera")
+
+if camera_image:
+    # Supply camera_image to convert_image to get the grayscale version
+    img = Image.open(camera_image)
+    gray_camera_img = img.convert('L')
+    st.image(gray_camera_img)
+
+# Check if the image exists meaning the user has uploaded a file
+if uploaded_image:
+    # Open the user uploaded image with PIL
+    img = Image.open(uploaded_image)
+    # Convert the image to grayscale
+    gray_uploaded_img = img.convert('L')
+    # Display the grayscale image on the webpage
+    st.image(gray_uploaded_img)
+
+todos = access_todos("r")
 
 def add_todo():
     new_todo = st.session_state["new_todo"] + "\n"
