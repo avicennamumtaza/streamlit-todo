@@ -5,6 +5,8 @@ from todos import access_todos
 todos = access_todos("r")
 # print(todos)
 
+st.set_page_config(layout="wide")
+
 with st.expander("Open Grayscaler"):
     cam_img = st.camera_input("Camera")
 
@@ -12,8 +14,6 @@ if cam_img:
     process_img = Image.open(cam_img)
     result_img = process_img.convert("L")
     st.image(result_img)
-
-st.set_page_config(layout="wide")
 
 def add_todo():
     new_todo = st.session_state["new_todo"] + "\n"
