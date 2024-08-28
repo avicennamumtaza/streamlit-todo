@@ -4,6 +4,8 @@ from todos import access_todos
 todos = access_todos("r")
 # print(todos)
 
+st.set_page_config(layout="wide")
+
 def add_todo():
     new_todo = st.session_state["new_todo"] + "\n"
     todos.append(new_todo)
