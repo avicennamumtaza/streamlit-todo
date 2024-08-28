@@ -5,7 +5,7 @@ from todos import access_todos
 todos = access_todos("r")
 # print(todos)
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title=None, page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 with st.expander("Open Grayscaler"):
     cam_img = st.camera_input("Camera")
